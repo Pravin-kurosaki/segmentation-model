@@ -132,13 +132,18 @@ pip install -r requirements.txt
 ```
 
 ### 2. Model Weights Setup
-GitHub enforces a 100 MB file limit, excluding large `.pth` checkpoint binaries (~164 MB) from direct git tracking.
-1. Download `best_model.pth` from the repository **Releases** tab.
-2. Place the downloaded checkpoint into the `checkpoints/` directory:
-   ```bash
-   mkdir checkpoints
-   # Move best_model.pth into checkpoints/
-   ```
+The trained checkpoint (`best_model.pth`, 164.17 MB) is published and hosted on [**GitHub Release v1.0.0**](https://github.com/Pravin-kurosaki/segmentation-model/releases/tag/v1.0.0).
+
+Download the model weights directly:
+```bash
+# Windows (PowerShell)
+New-Item -ItemType Directory -Force -Path checkpoints
+Invoke-WebRequest -Uri "https://github.com/Pravin-kurosaki/segmentation-model/releases/download/v1.0.0/best_model.pth" -OutFile "checkpoints/best_model.pth"
+
+# Linux / macOS (curl)
+mkdir -p checkpoints
+curl -L -o checkpoints/best_model.pth "https://github.com/Pravin-kurosaki/segmentation-model/releases/download/v1.0.0/best_model.pth"
+```
 
 ### 3. Single-Image Inference
 Execute inference on any sample face:
