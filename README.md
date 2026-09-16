@@ -132,17 +132,17 @@ pip install -r requirements.txt
 ```
 
 ### 2. Model Weights Setup
-The trained checkpoint (`best_model.pth`, 164.17 MB) is published and hosted on [**GitHub Release v1.0.0**](https://github.com/Pravin-kurosaki/segmentation-model/releases/tag/v1.0.0).
+The trained checkpoint (`best_model.pth`, 164.17 MB) is published and hosted on [**GitHub Release v1.0.1**](https://github.com/Pravin-kurosaki/segmentation-model/releases/tag/v1.0.1).
 
 Download the model weights directly:
 ```bash
 # Windows (PowerShell)
 New-Item -ItemType Directory -Force -Path checkpoints
-Invoke-WebRequest -Uri "https://github.com/Pravin-kurosaki/segmentation-model/releases/download/v1.0.0/best_model.pth" -OutFile "checkpoints/best_model.pth"
+Invoke-WebRequest -Uri "https://github.com/Pravin-kurosaki/segmentation-model/releases/download/v1.0.1/best_model.pth" -OutFile "checkpoints/best_model.pth"
 
 # Linux / macOS (curl)
 mkdir -p checkpoints
-curl -L -o checkpoints/best_model.pth "https://github.com/Pravin-kurosaki/segmentation-model/releases/download/v1.0.0/best_model.pth"
+curl -L -o checkpoints/best_model.pth "https://github.com/Pravin-kurosaki/segmentation-model/releases/download/v1.0.1/best_model.pth"
 ```
 
 ### 3. Single-Image Inference
