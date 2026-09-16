@@ -1,0 +1,24 @@
+{
+  "n_images": 30000,
+  "n_mask_ids": 30000,
+  "ids_with_masks": 30000,
+  "missing_masks": 0,
+  "corrupted": 0,
+  "image_dimensions": {
+    "1024x1024": 200
+  },
+  "pixel_counts": {
+    "background": 69508660,
+    "skin": 61659604,
+    "left_eye": 1325184,
+    "right_eye": 1376672,
+    "nose": 3929224,
+    "mouth": 2935292,
+    "hair": 64393020,
+    "left_ear": 1313788,
+    "right_ear": 1217876,
+    "hat": 1626076,
+    "glasses": 429804
+  },
+  "n_classes_found": 11
+}

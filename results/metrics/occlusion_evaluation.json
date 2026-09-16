@@ -1,0 +1,290 @@
+[
+  {
+    "sample_id": "00013_clean",
+    "stem": "00013",
+    "condition": "clean",
+    "occlusion_pct": 0.0,
+    "is_recognizable": true,
+    "regional_occlusion": {
+      "upper": 0.0,
+      "mid": 0.0,
+      "lower": 0.0
+    },
+    "adaptive_weights": {
+      "upper": 0.333,
+      "mid": 0.333,
+      "lower": 0.334
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00013_clean_card.png"
+  },
+  {
+    "sample_id": "00013_mask",
+    "stem": "00013",
+    "condition": "mask",
+    "occlusion_pct": 36.88,
+    "is_recognizable": true,
+    "regional_occlusion": {
+      "upper": 0.0,
+      "mid": 45.18,
+      "lower": 69.3
+    },
+    "adaptive_weights": {
+      "upper": 0.539,
+      "mid": 0.295,
+      "lower": 0.166
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00013_mask_card.png"
+  },
+  {
+    "sample_id": "00013_sunglasses",
+    "stem": "00013",
+    "condition": "sunglasses",
+    "occlusion_pct": 13.24,
+    "is_recognizable": true,
+    "regional_occlusion": {
+      "upper": 26.28,
+      "mid": 11.88,
+      "lower": 0.0
+    },
+    "adaptive_weights": {
+      "upper": 0.282,
+      "mid": 0.337,
+      "lower": 0.381
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00013_sunglasses_card.png"
+  },
+  {
+    "sample_id": "00013_heavy",
+    "stem": "00013",
+    "condition": "heavy",
+    "occlusion_pct": 49.96,
+    "is_recognizable": true,
+    "regional_occlusion": {
+      "upper": 25.54,
+      "mid": 57.35,
+      "lower": 69.3
+    },
+    "adaptive_weights": {
+      "upper": 0.504,
+      "mid": 0.289,
+      "lower": 0.207
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00013_heavy_card.png"
+  },
+  {
+    "sample_id": "00018_clean",
+    "stem": "00018",
+    "condition": "clean",
+    "occlusion_pct": 0.0,
+    "is_recognizable": true,
+    "regional_occlusion": {
+      "upper": 0.0,
+      "mid": 0.0,
+      "lower": 0.0
+    },
+    "adaptive_weights": {
+      "upper": 0.333,
+      "mid": 0.333,
+      "lower": 0.334
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00018_clean_card.png"
+  },
+  {
+    "sample_id": "00018_mask",
+    "stem": "00018",
+    "condition": "mask",
+    "occlusion_pct": 39.94,
+    "is_recognizable": true,
+    "regional_occlusion": {
+      "upper": 0.0,
+      "mid": 46.83,
+      "lower": 80.24
+    },
+    "adaptive_weights": {
+      "upper": 0.578,
+      "mid": 0.307,
+      "lower": 0.115
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00018_mask_card.png"
+  },
+  {
+    "sample_id": "00018_sunglasses",
+    "stem": "00018",
+    "condition": "sunglasses",
+    "occlusion_pct": 15.6,
+    "is_recognizable": true,
+    "regional_occlusion": {
+      "upper": 35.32,
+      "mid": 9.02,
+      "lower": 0.0
+    },
+    "adaptive_weights": {
+      "upper": 0.253,
+      "mid": 0.356,
+      "lower": 0.391
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00018_sunglasses_card.png"
+  },
+  {
+    "sample_id": "00018_heavy",
+    "stem": "00018",
+    "condition": "heavy",
+    "occlusion_pct": 57.57,
+    "is_recognizable": false,
+    "regional_occlusion": {
+      "upper": 38.76,
+      "mid": 58.13,
+      "lower": 80.24
+    },
+    "adaptive_weights": {
+      "upper": 0.498,
+      "mid": 0.341,
+      "lower": 0.161
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00018_heavy_card.png"
+  },
+  {
+    "sample_id": "00022_clean",
+    "stem": "00022",
+    "condition": "clean",
+    "occlusion_pct": 0.0,
+    "is_recognizable": true,
+    "regional_occlusion": {
+      "upper": 0.0,
+      "mid": 0.0,
+      "lower": 0.0
+    },
+    "adaptive_weights": {
+      "upper": 0.333,
+      "mid": 0.333,
+      "lower": 0.334
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00022_clean_card.png"
+  },
+  {
+    "sample_id": "00022_mask",
+    "stem": "00022",
+    "condition": "mask",
+    "occlusion_pct": 41.47,
+    "is_recognizable": true,
+    "regional_occlusion": {
+      "upper": 0.0,
+      "mid": 56.84,
+      "lower": 77.08
+    },
+    "adaptive_weights": {
+      "upper": 0.602,
+      "mid": 0.26,
+      "lower": 0.138
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00022_mask_card.png"
+  },
+  {
+    "sample_id": "00022_sunglasses",
+    "stem": "00022",
+    "condition": "sunglasses",
+    "occlusion_pct": 14.99,
+    "is_recognizable": true,
+    "regional_occlusion": {
+      "upper": 35.45,
+      "mid": 5.55,
+      "lower": 0.0
+    },
+    "adaptive_weights": {
+      "upper": 0.249,
+      "mid": 0.365,
+      "lower": 0.386
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00022_sunglasses_card.png"
+  },
+  {
+    "sample_id": "00022_heavy",
+    "stem": "00022",
+    "condition": "heavy",
+    "occlusion_pct": 56.55,
+    "is_recognizable": false,
+    "regional_occlusion": {
+      "upper": 37.42,
+      "mid": 60.7,
+      "lower": 77.08
+    },
+    "adaptive_weights": {
+      "upper": 0.501,
+      "mid": 0.315,
+      "lower": 0.184
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00022_heavy_card.png"
+  },
+  {
+    "sample_id": "00035_clean",
+    "stem": "00035",
+    "condition": "clean",
+    "occlusion_pct": 0.0,
+    "is_recognizable": true,
+    "regional_occlusion": {
+      "upper": 0.0,
+      "mid": 0.0,
+      "lower": 0.0
+    },
+    "adaptive_weights": {
+      "upper": 0.333,
+      "mid": 0.333,
+      "lower": 0.334
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00035_clean_card.png"
+  },
+  {
+    "sample_id": "00035_mask",
+    "stem": "00035",
+    "condition": "mask",
+    "occlusion_pct": 52.54,
+    "is_recognizable": false,
+    "regional_occlusion": {
+      "upper": 20.42,
+      "mid": 85.98,
+      "lower": 52.88
+    },
+    "adaptive_weights": {
+      "upper": 0.566,
+      "mid": 0.1,
+      "lower": 0.334
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00035_mask_card.png"
+  },
+  {
+    "sample_id": "00035_sunglasses",
+    "stem": "00035",
+    "condition": "sunglasses",
+    "occlusion_pct": 16.66,
+    "is_recognizable": true,
+    "regional_occlusion": {
+      "upper": 47.76,
+      "mid": 0.0,
+      "lower": 0.0
+    },
+    "adaptive_weights": {
+      "upper": 0.207,
+      "mid": 0.396,
+      "lower": 0.397
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00035_sunglasses_card.png"
+  },
+  {
+    "sample_id": "00035_heavy",
+    "stem": "00035",
+    "condition": "heavy",
+    "occlusion_pct": 67.6,
+    "is_recognizable": false,
+    "regional_occlusion": {
+      "upper": 64.39,
+      "mid": 84.74,
+      "lower": 53.68
+    },
+    "adaptive_weights": {
+      "upper": 0.366,
+      "mid": 0.157,
+      "lower": 0.477
+    },
+    "card_path": "C:\\Users\\rajap\\Downloads\\face\\results\\occlusion_reports\\00035_heavy_card.png"
+  }
+]

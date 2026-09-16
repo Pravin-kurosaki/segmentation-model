@@ -1,0 +1,41 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Occlusion-Aware Face Recognition — requirements.txt
+# Install with:  pip install -r requirements.txt
+# For CUDA 12.x: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Deep learning
+torch>=2.2.0
+torchvision>=0.17.0
+
+# Segmentation model toolkit (provides pretrained U-Net + encoders)
+segmentation-models-pytorch>=0.3.3
+
+# Image processing
+Pillow>=10.0.0
+opencv-python>=4.9.0.80
+
+# Augmentation
+albumentations>=1.4.0
+
+# Numerics / data
+numpy>=1.26.0
+pandas>=2.2.0
+
+# Visualization
+matplotlib>=3.8.0
+seaborn>=0.13.0
+
+# Progress bars
+tqdm>=4.66.0
+
+# Experiment tracking / config
+tensorboard>=2.16.0
+
+# Utilities
+scikit-learn>=1.4.0
+scipy>=1.13.0
+
+# Notebook support (optional, for notebooks/)
+ipykernel>=6.29.0
+ipywidgets>=8.1.0

@@ -1,0 +1,79 @@
+﻿# ==============================================================================
+# Byte-compiled / optimized / DLL files
+# ==============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ==============================================================================
+# Environments & Virtual Envs
+# ==============================================================================
+.env
+.venv/
+venv/
+env/
+ENV/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ==============================================================================
+# Jupyter Notebooks Checkpoints
+# ==============================================================================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ==============================================================================
+# DATASET RULES - DO NOT UPLOAD RAW OR PROCESSED 30K DATASET
+# ==============================================================================
+dataset/raw/
+dataset/raw/**
+dataset/processed/
+dataset/processed/**
+
+# Track sample dataset (10 representative pairs) and split manifests
+!dataset/sample/
+!dataset/sample/**
+!dataset/splits/
+!dataset/splits/**
+
+# ==============================================================================
+# MODEL CHECKPOINTS (>100MB exceeds GitHub limits - download via Releases)
+# ==============================================================================
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+*.onnx
+
+# ==============================================================================
+# Experimental / Generated Results & TensorBoard
+# ==============================================================================
+results/*
+!results/metrics/
+results/metrics/*
+!results/metrics/*.json
+
+runs/
+logs/
+*.tfevents.*
+
+# Track curated documentation assets and benchmark metrics
+!assets/
+!assets/**
+
+# ==============================================================================
+# OS / IDE Artifacts
+# ==============================================================================
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
