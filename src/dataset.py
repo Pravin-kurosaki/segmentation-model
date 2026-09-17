@@ -168,6 +168,7 @@ def build_dataloaders(
         images_dir  = config.PROCESSED_IMAGES_DIR,
         masks_dir   = config.PROCESSED_MASKS_DIR,
         transform   = get_train_transforms(),
+        occlusion_prob = occlusion_prob,
     )
     val_ds = FaceSegDataset(
         split_file  = config.SPLITS_DIR  / "val.txt",
@@ -234,9 +235,10 @@ if __name__ == "__main__":
     print(f"  Image value range : [{images.min():.3f}, {images.max():.3f}]")
     print(f"  Mask  classes     : {sorted(masks.unique().tolist())}")
 
-    assert images.shape == (cfg.BATCH_SIZE, 3, cfg.IMAGE_SIZE, cfg.IMAGE_SIZE), \
+    h_tgt, w_tgt = cfg.IMAGE_SIZE if isinstance(cfg.IMAGE_SIZE, tuple) else (cfg.IMAGE_SIZE, cfg.IMAGE_SIZE)
+    assert images.shape == (cfg.BATCH_SIZE, 3, h_tgt, w_tgt), \
         f"Unexpected image shape: {images.shape}"
-    assert masks.shape == (cfg.BATCH_SIZE, cfg.IMAGE_SIZE, cfg.IMAGE_SIZE), \
+    assert masks.shape == (cfg.BATCH_SIZE, h_tgt, w_tgt), \
         f"Unexpected mask shape: {masks.shape}"
     assert images.dtype == torch.float32
     assert masks.dtype  == torch.int64

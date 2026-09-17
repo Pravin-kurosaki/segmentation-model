@@ -11,5 +11,5 @@
   "image_interp": "bilinear",
   "mask_interp": "nearest",
   "split_by": "identity",
-  "elapsed_s": 803.3
+  "elapsed_s": 767.6
 }
