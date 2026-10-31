@@ -1,4 +1,4 @@
-﻿"""
+"""
 infer.py - Quickstart Single-Image Inference and Occlusion Diagnostics.
 
 Performs:
@@ -51,6 +51,10 @@ def parse_args():
     parser.add_argument("--occlude", type=str, default="none",
                         choices=["none", "mask", "sunglasses", "heavy"],
                         help="Optional synthetic occlusion to simulate on input image")
+    parser.add_argument("--crop", action="store_true", default=True,
+                        help="Automatically detect and crop face to 256x256 (default: enabled)")
+    parser.add_argument("--no-crop", dest="crop", action="store_false",
+                        help="Disable automatic face cropping and resize the whole image directly")
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu",
                         help="Device to run inference on (cuda/cpu)")
     return parser.parse_args()
@@ -96,10 +100,30 @@ def main():
     target_size = cfg.IMAGE_SIZE if isinstance(cfg.IMAGE_SIZE, tuple) else (cfg.IMAGE_SIZE, cfg.IMAGE_SIZE)
     h_target, w_target = target_size
 
-    # Load and resize image
+    # Load and optionally pre-crop face
     raw_img = Image.open(image_path).convert("RGB")
-    if raw_img.size != (w_target, h_target):
-        raw_img = raw_img.resize((w_target, h_target), Image.Resampling.BILINEAR)
+    if args.crop:
+        try:
+            from src.face_cropper import FacePreCropper
+            cropper = FacePreCropper()
+            crop_img, meta = cropper.crop_face(raw_img, target_size=(w_target, h_target))
+            if meta.get("detected"):
+                if meta.get("already_tight"):
+                    print(f"Face is already tightly framed ({meta['original_size'][0]}x{meta['original_size'][1]}).")
+                else:
+                    x1, y1, x2, y2 = meta["crop_box"]
+                    print(f"Auto-Cropped face from ({x1}, {y1}) to ({x2}, {y2}) [{x2-x1}x{y2-y1}px] -> standard 256x256")
+                raw_img = crop_img
+            else:
+                print("No face detected by YuNet; using full-frame resize.")
+                raw_img = raw_img.resize((w_target, h_target), Image.Resampling.BILINEAR)
+        except Exception as e:
+            print(f"Auto-cropping warning ({e}); using direct resize.")
+            raw_img = raw_img.resize((w_target, h_target), Image.Resampling.BILINEAR)
+    else:
+        if raw_img.size != (w_target, h_target):
+            raw_img = raw_img.resize((w_target, h_target), Image.Resampling.BILINEAR)
+
     img_np = np.array(raw_img, dtype=np.uint8)
 
     # Load model

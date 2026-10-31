@@ -1,8 +1,10 @@
-﻿# Occlusion-Aware Face Recognition Using Semantic Segmentation
+# Occlusion-Aware Face Recognition Using Semantic Segmentation
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)](https://pytorch.org/)
-[![Architecture](https://img.shields.io/badge/Model-U--Net%20(ResNet18)-green.svg)](https://github.com/qubvel/segmentation_models.pytorch)
+[![Architecture](https://img.shields.io/badge/Model-U--Net%20(ResNet18)-green.svg)](MODEL_DETAILS.md)
+[![Model Details](https://img.shields.io/badge/Docs-Model%20Details-blueviolet.svg)](MODEL_DETAILS.md)
+[![Project Spec](https://img.shields.io/badge/Docs-Full%20Specification-blue.svg)](PROJECT_DOCUMENTATION.md)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 An intelligent, occlusion-aware facial recognition pipeline engineered to segment facial anatomy and occluders, quantify regional facial coverage, evaluate recognition viability, and compute adaptive feature weights.

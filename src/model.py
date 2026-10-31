@@ -20,6 +20,10 @@ Design rules:
 
 import torch
 import torch.nn as nn
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).parent))
+import config as cfg
 
 try:
     import segmentation_models_pytorch as smp
@@ -33,7 +37,7 @@ except ImportError:
 def build_model(
     encoder_name:    str = "resnet18",
     encoder_weights: str = "imagenet",
-    num_classes:     int = 11,
+    num_classes:     int = cfg.NUM_CLASSES,
     in_channels:     int = 3,
 ) -> smp.Unet:
     """

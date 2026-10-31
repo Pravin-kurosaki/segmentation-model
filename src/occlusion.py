@@ -63,8 +63,9 @@ def estimate_occlusion(
     hat_occ        = (mask == hat_class_id)
     glasses_occ    = (mask == glasses_class_id)
 
-    # Face convex hull to capture intrusions
-    face_coords = np.where(core_face_mask | mask_occ | sunglasses_occ)
+    # Compute facial boundary and geometric convex hull
+    face_elements = core_face_mask | mask_occ | sunglasses_occ | glasses_occ
+    face_coords = np.where(face_elements)
     if len(face_coords[0]) == 0:
         return {
             "total_face_pixels": 0,
@@ -76,25 +77,63 @@ def estimate_occlusion(
             "adaptive_weights": {"upper": 0.333, "mid": 0.333, "lower": 0.334},
             "occlusion_breakdown": {"mask": 0.0, "sunglasses": 0.0, "hat": 0.0},
             "region_bounds": None,
+            "occ_mask": np.zeros((h, w), dtype=bool),
         }
 
     ymin, xmin = int(face_coords[0].min()), int(face_coords[1].min())
     ymax, xmax = int(face_coords[0].max()), int(face_coords[1].max())
-    face_h = max(1, ymax - ymin)
 
-    # Full anatomical face area includes visible face + occluders over face
-    # Any hat/hair inside the face convex hull or upper region
-    total_face_area = core_face_mask | mask_occ | sunglasses_occ
-    total_face_pixels = int(total_face_area.sum())
+    # Compute facial convex hull envelope to detect occluder intrusions
+    contours, _ = cv2.findContours(face_elements.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    if contours:
+        valid_contours = [c for c in contours if cv2.contourArea(c) > 10] or contours
+        all_pts = np.vstack(valid_contours).reshape(-1, 2)
 
-    if total_face_pixels == 0:
-        total_face_pixels = 1
+        # Anatomical Chin Prior: Detect if the lower face/mouth is occluded
+        eyes = (mask == 2) | (mask == 3)
+        eye_ys = np.where(eyes)[0]
+        hair_ys = np.where(mask == 6)[0]
 
-    # Occluded pixels on the face
-    direct_occlusion = mask_occ | sunglasses_occ
+        if len(eye_ys) > 0:
+            y_eyes = float(eye_ys.mean())
+            cranial_half = (y_eyes - hair_ys.min()) if len(hair_ys) > 0 else (ymax - ymin) * 0.5
+            w_face = xmax - xmin
+            cx = (xmin + xmax) // 2
+            expected_chin_y = min(h - 4, int(y_eyes + max(cranial_half * 1.05, w_face * 0.85)))
+
+            # If visible face stops noticeably above expected chin (indicating mask/hand occlusion)
+            if ymax < expected_chin_y - 18:
+                chin_contour = np.array([
+                    [cx, expected_chin_y],
+                    [int(cx - w_face * 0.25), int(expected_chin_y - 6)],
+                    [int(cx + w_face * 0.25), int(expected_chin_y - 6)],
+                    [int(cx - w_face * 0.42), int(expected_chin_y - 25)],
+                    [int(cx + w_face * 0.42), int(expected_chin_y - 25)],
+                ])
+                all_pts = np.vstack([all_pts, chin_contour])
+                ymax = expected_chin_y
+
+        face_h = max(1, ymax - ymin)
+        hull = cv2.convexHull(all_pts)
+        hull_mask = np.zeros((h, w), dtype=np.uint8)
+        cv2.drawContours(hull_mask, [hull], -1, 1, thickness=-1)
+        total_face_area = (hull_mask == 1)
+    else:
+        face_h = max(1, ymax - ymin)
+        total_face_area = face_elements
+
+    total_face_pixels = max(1, int(total_face_area.sum()))
+
+    # Direct occlusion includes:
+    # 1. Any non-anatomical intrusion inside the facial convex hull (masks/sunglasses classified as background)
+    # 2. Explicit occluder classes (mask, sunglasses)
+    hull_intrusions = total_face_area & (~core_face_mask)
+    direct_occlusion = hull_intrusions | mask_occ | sunglasses_occ
     occluded_pixels = int(direct_occlusion.sum())
 
-    total_occlusion_pct = round((occluded_pixels / total_face_pixels) * 100.0, 2)
+    raw_occlusion_pct = (occluded_pixels / total_face_pixels) * 100.0
+    # Clean faces have small (~0-3%) boundary concavities along jawline; threshold them out
+    total_occlusion_pct = round(max(0.0, raw_occlusion_pct - 2.5), 2) if raw_occlusion_pct > 3.0 else 0.0
     is_recognizable = (total_occlusion_pct < 50.0)
 
     # Tri-region facial partition (vertical slicing based on face height)
@@ -119,7 +158,8 @@ def estimate_occlusion(
         if zone_face == 0:
             return 0.0
         zone_occ = int((direct_occlusion & zone_mask).sum())
-        return round((zone_occ / zone_face) * 100.0, 2)
+        raw_pct = (zone_occ / zone_face) * 100.0
+        return round(max(0.0, raw_pct - 2.5), 2) if raw_pct > 3.0 else 0.0
 
     occ_upper = calc_zone_stats(upper_zone)
     occ_mid   = calc_zone_stats(mid_zone)
@@ -162,7 +202,8 @@ def estimate_occlusion(
             "xmin": xmin, "xmax": xmax,
             "y_split1": y_split1,
             "y_split2": y_split2,
-        }
+        },
+        "occ_mask": direct_occlusion,
     }
 
 
@@ -189,7 +230,9 @@ def draw_occlusion_overlay(
     cv2.line(canvas, (xmin, y_split2), (xmax, y_split2), (255, 200, 0), 1)
 
     # Highlight occluded pixels with red-orange tint
-    occ_pixels = (mask == 10) | (mask == 11)
+    occ_pixels = occ_info.get("occ_mask")
+    if occ_pixels is None:
+        occ_pixels = (mask == 10) | (mask == 11)
     if occ_pixels.any():
         overlay = canvas.copy()
         overlay[occ_pixels] = [255, 60, 60]  # bright red highlight

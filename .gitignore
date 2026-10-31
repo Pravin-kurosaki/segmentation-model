@@ -1,4 +1,4 @@
-﻿# ==============================================================================
+# ==============================================================================
 # Byte-compiled / optimized / DLL files
 # ==============================================================================
 __pycache__/
@@ -35,6 +35,8 @@ dataset/raw/
 dataset/raw/**
 dataset/processed/
 dataset/processed/**
+dataset/LaPa/
+dataset/LaPa/**
 
 # Track sample dataset (10 representative pairs) and split manifests
 !dataset/sample/

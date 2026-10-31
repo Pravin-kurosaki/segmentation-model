@@ -31,7 +31,8 @@ def _load_templates():
     _CACHED_MASK_TEMPLATES = []
     if TEMPLATES_DIR.exists():
         mask_files = ["surgical_blue.png", "surgical_green.png", "surgical.png",
-                      "KN95.png", "N95.png", "cloth.png"]
+                      "KN95.png", "N95.png", "cloth.png",
+                      "black_cloth.png", "black_surgical.png"]
         for mf in mask_files:
             p = TEMPLATES_DIR / mf
             if p.exists():
